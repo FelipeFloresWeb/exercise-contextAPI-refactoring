@@ -4,22 +4,36 @@ import React from 'react';
 import carBlue from './images/carBlue.jpeg';
 import carRed from './images/carRed.jpeg';
 import carYellow from './images/carYellow.jpeg';
-import MyContext from './mycontext/Mycontext';
+import MyContext from './context/Mycontext';
 
-function Cars({ redCar, blueCar, yellowCar, moveCar }) {
+const checkSignal = (collor) => {
+ switch (collor) {
+   case 'green':    
+     return 'green-sinal';
+     case 'yellow':    
+     return 'yellow-sinal';
+   default:
+     return 'car-left';
+ }
+}
+
+function Cars(value) {
   return (
     <MyContext.Consumer>
       {
-        value => (
+        value => {
+          const { state, moveCar, changeSignal } = value;
+        return (
           <div>
+            {console.log(state)}
       <div>
         <img
-          className={value.state.redCar ? 'car-right' : 'car-left'}
+          className={checkSignal(state.signalColor)}
           src={carRed}
           alt="red car"
         />
         <button
-          onClick={() => value.moveCar('redCar', !value.state.redCar)}
+          onClick={() => moveCar('redCar', state.redCar)}
           type="button"
         >
           Move
@@ -27,12 +41,12 @@ function Cars({ redCar, blueCar, yellowCar, moveCar }) {
       </div>
       <div>
         <img
-          className={value.state.blueCar ? 'car-right' : 'car-left'}
+          className={checkSignal(state.signalColor)}
           src={carBlue}
           alt="blue car"
         />
         <button
-          onClick={() => value.moveCar('blueCar', !value.state.blueCar)}
+          onClick={() => moveCar('blueCar', !state.blueCar)}
           type="button"
         >
           Move
@@ -40,19 +54,19 @@ function Cars({ redCar, blueCar, yellowCar, moveCar }) {
       </div>
       <div>
         <img
-          className={value.state.yellowCar ? 'car-right' : 'car-left'}
+          className={checkSignal(state.signalColor)}
           src={carYellow}
           alt="yellow car"
         />
         <button
-          onClick={() => value.moveCar('yellowCar', !value.state.yellowCar)}
+          onClick={() => moveCar('yellowCar', !state.yellowCar)}
           type="button"
         >
           Move
         </button>
       </div>
     </div>
-        )
+        )}
       }
     </MyContext.Consumer> 
   );
