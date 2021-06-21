@@ -59,10 +59,10 @@ function Cars({ redCar, blueCar, yellowCar, moveCar }) {
 }
 
 Cars.propTypes = {
-  moveCar: PropTypes.func.isRequired,
-  blueCar: PropTypes.bool.isRequired,
-  redCar: PropTypes.bool.isRequired,
-  yellowCar: PropTypes.bool.isRequired,
-};
+  moveCar: PropTypes.func,
+  blueCar: PropTypes.bool,
+  redCar: PropTypes.bool,
+  yellowCar: PropTypes.bool,
+}.isRequired;
 
 export default Cars;

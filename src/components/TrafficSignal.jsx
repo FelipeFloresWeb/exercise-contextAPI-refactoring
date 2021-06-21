@@ -1,8 +1,9 @@
 import React from 'react';
-import { createStore } from 'redux';
-import redSignal from './images/redSignal.jpeg';
-import greenSignal from './images/greenSignal.jpeg';
-import yellowSignal from './images/yellowSignal.jpeg';
+
+import redSignal from '../images/redSignal.jpeg';
+import greenSignal from '../images/greenSignal.jpeg';
+import yellowSignal from '../images/yellowSignal.jpeg';
+import MyContext from '../mycontext/Mycontext';
 
 const renderSignal = (signalColor) => {
   if (signalColor === 'red') {
@@ -17,23 +18,23 @@ const renderSignal = (signalColor) => {
   return null;
 };
 
-export default function TrafficSignal({ signalColor, changeSignal }) {
+function TrafficSignal() {
   return (
-    <div>
+    <MyContext.Consumer>
+      {
+        value => (
+          <div>
       <div className="button-container">
-        <button onClick={mapStateToProps} type="button">Red</button>
-        <button type="button">Yellow</button>
-        <button type="button">Green</button>
+        <button onClick={ value.changeSignal } type="button">Red</button>
+        <button onClick={ value.changeSignal } type="button">Yellow</button>
+        <button onClick={ value.changeSignal } type="button">Green</button>
       </div>
-      <img className="signal" src={renderSignal(signalColor)} alt="" />
+      <img className="signal" src={renderSignal(value.state.signalColor)} alt="" />
     </div>
+        )
+      }
+    </MyContext.Consumer>
   );
 }
 
-const mapStateToProps = (event) => ({
-  signalColor: event.target.innerHTML,
-});
-
-const mapDispatchToProps = () => ({
-  changeSignal: /* Coloque seu código aqui... */
-});
+export default TrafficSignal;
