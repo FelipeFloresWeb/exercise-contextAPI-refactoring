@@ -12,7 +12,6 @@ function Cars({ redCar, blueCar, yellowCar, moveCar }) {
       {
         value => (
           <div>
-            {console.log(value)}
       <div>
         <img
           className={value.state.redCar ? 'car-right' : 'car-left'}
