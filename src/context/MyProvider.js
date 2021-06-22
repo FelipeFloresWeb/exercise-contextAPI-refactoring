@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
-import MyContext from './context/Mycontext';
+import MyContext from '../context/Mycontext';
 
 class MyProvider extends Component {
   constructor() {
